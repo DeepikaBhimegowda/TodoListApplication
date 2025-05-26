@@ -1,0 +1,51 @@
+<!-- src/main/resources/templates/todos.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Todos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8 font-sans">
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow">
+    <h2 class="text-2xl font-bold mb-4 text-center text-blue-700">My Todo List</h2>
+
+    <!-- Add Todo Form -->
+    <form th:action="@{/todos/add}" method="post" class="mb-6 space-y-4">
+        <input type="text" name="title" placeholder="Title" class="w-full p-2 border border-gray-300 rounded" required>
+        <input type="text" name="description" placeholder="Description" class="w-full p-2 border border-gray-300 rounded">
+        <input type="date" name="dueDate" class="w-full p-2 border border-gray-300 rounded" required>
+        <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Add Todo</button>
+    </form>
+
+    <!-- Todo List -->
+    <div th:if="${#lists.isEmpty(todos)}" class="text-center text-gray-500">
+        No todos yet. Add one!
+    </div>
+
+    <ul class="space-y-4" th:each="todo : ${todos}">
+        <li class="flex justify-between items-center p-4 border rounded" th:classappend="${todo.completed} ? 'bg-green-100' : 'bg-white'">
+            <div>
+                <h3 class="text-lg font-semibold" th:text="${todo.title}">Title</h3>
+                <p class="text-sm text-gray-600" th:text="${todo.description}">Description</p>
+                <p class="text-xs text-gray-400" th:text="${todo.dueDate}">Due Date</p>
+            </div>
+            <div class="space-x-2">
+                <form th:action="@{/todos/toggle/{id}(id=${todo.id})}" method="post" class="inline">
+                    <button class="text-sm bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500" type="submit">
+                        <span th:text="${todo.completed} ? 'Undo' : 'Done'">Toggle</span>
+                    </button>
+                </form>
+                <form th:action="@{/todos/delete/{id}(id=${todo.id})}" method="post" class="inline">
+                    <button class="text-sm bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600" type="submit">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+    <div class="mt-6 text-center">
+        <a href="/logout" class="text-blue-600 hover:underline">Logout</a>
+    </div>
+</div>
+</body>
+</html>

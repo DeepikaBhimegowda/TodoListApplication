@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-yellow-100 flex items-center justify-center min-h-screen font-sans">
+<div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center text-yellow-600">Register</h2>
+
+    <form action="/register" method="post" class="space-y-4">
+        <div>
+            <input type="text" name="fullName" placeholder="Full Name" class="w-full p-2 border border-gray-300 rounded" required>
+        </div>
+        <div>
+            <input type="text" name="username" placeholder="Username" class="w-full p-2 border border-gray-300 rounded" required>
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password" class="w-full p-2 border border-gray-300 rounded" required>
+        </div>
+        <div>
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" class="w-full p-2 border border-gray-300 rounded" required>
+        </div>
+        <div>
+            <button type="submit" class="w-full bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">Register</button>
+        </div>
+    </form>
+
+    <p class="mt-4 text-sm text-center">Already have an account? <a href="/" class="text-yellow-600 hover:underline">Login</a></p>
+</div>
+</body>
+</html>
